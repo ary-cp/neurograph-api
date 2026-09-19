@@ -16,7 +16,7 @@ app.set('trust proxy', 1) // correct client IPs behind Render / Railway / Fly
 app.use(helmet())
 app.use(
   cors({
-    origin: corsOrigins, // Vite dev server + prod URL(s), from CLIENT_ORIGIN
+    origin: (origin, cb) => cb(null, true), // Dynamically allow any origin (fixes Vercel preview URLs)
     methods: ['GET', 'POST', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true,
