@@ -1,0 +1,30 @@
+{
+  "name": "neurograph-server",
+  "version": "0.1.0",
+  "private": true,
+  "description": "NeuroGraph brain — Express API that turns unstructured text into a React Flow knowledge graph via Groq (LLaMA-3)",
+  "type": "module",
+  "main": "server.js",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "node --watch server.js",
+    "start": "node server.js",
+    "test": "node --test \"scripts/*.test.js\"",
+    "smoke": "node scripts/smoke.js"
+  },
+  "dependencies": {
+    "@dagrejs/dagre": "^3.1.1",
+    "@supabase/supabase-js": "^2.116.0",
+    "cors": "^2.8.6",
+    "dotenv": "^18.0.1",
+    "express": "^5.2.1",
+    "express-rate-limit": "^8.7.0",
+    "groq-sdk": "^1.6.0",
+    "helmet": "^8.3.0",
+    "morgan": "^1.12.1",
+    "multer": "^2.4.0",
+    "zod": "^4.6.5"
+  }
+}
