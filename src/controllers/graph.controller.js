@@ -89,3 +89,14 @@ export async function transcribeHandler(req, res, next) {
     if (filePath) await fs.promises.unlink(filePath).catch(() => {})
   }
 }
+
+export async function updateNodeHandler(req, res, next) {
+  try {
+    const { room_id, node } = req.body
+    if (!room_id || !node || !node.id) return res.json({ ok: false, error: 'missing room_id or node' })
+    await saveNote({ text: "[SYSTEM]: Sticky note updated on " + (node.data?.label || node.id), nodes: [node], edges: [], room_id })
+    res.json({ ok: true })
+  } catch (err) {
+    next(err)
+  }
+}
