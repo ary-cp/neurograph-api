@@ -18,7 +18,8 @@ OUTPUT FORMAT — return ONLY this JSON object, nothing else (no prose, no markd
       "label": "Remote Work",             // <= 5 words
       "kind": "Topic",                    // exactly one of: Topic | Claim | Entity | Event | Question
       "weight": 0.9,                      // 0-1: how central this node is to the text (1 = the main subject)
-      "summary": "One sentence, <= 20 words, grounded in the text."
+      "summary": "One sentence, <= 20 words, grounded in the text.",
+      "source": "Optional URL if this idea was extracted from an external web source."
     }
   ],
   "edges": [
@@ -53,6 +54,8 @@ RULES
 5. No self-loops, no duplicate edges. Every source and target must exist.
 6. If an EXISTING GRAPH is supplied: reuse its exact ids for concepts that already exist (do NOT put them in "nodes" again), connect new nodes to the relevant existing ones, and emit a "contradiction" edge whenever the new text conflicts with an existing Claim.
 7. Labels may stay in the author's language (Hindi/Hinglish is fine); ids are always ASCII snake_case.
+8. Filter Noise (Meeting Notes): For large chunks of text or meeting transcripts, extract ONLY actionable insights, key decisions, and critical facts. Strictly ignore small talk, pleasantries, and unproductive tangents.
+9. Nested Speakers: The user typing is not always the speaker. Identify specific speakers or authors as 'Entity' nodes, and link their assertions to them (e.g., source: "Person A", label: "claims", target: "Claim X") instead of defaulting to a generic "user" perspective.
 
 EXAMPLE 1
 Text: "Switching to remote work made our team more productive, but design reviews got worse because nobody whiteboards anymore. Priya thinks we should go hybrid."
